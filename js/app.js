@@ -27,6 +27,7 @@ class FactCheckApp {
         this.resetAppBtn = document.getElementById('resetAppBtn');
 
         // PWA 모달
+        this.installModal = document.getElementById('installModal');
         this.installBtn = document.getElementById('installBtn');
         this.closeModalBtn = document.getElementById('closeModalBtn');
 

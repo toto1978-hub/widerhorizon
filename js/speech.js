@@ -105,7 +105,13 @@ class FactCheckVoice {
                     break;
             }
 
-            if (errorMessage) onError(errorMessage);
+            if (errorMessage) {
+                // 디버깅을 위해 에러 코드 포함
+                onError(`${errorMessage} (에러 코드: ${event.error})`);
+            } else {
+                // 알 수 없는 에러
+                onError(`알 수 없는 오류가 발생했습니다. (에러 코드: ${event.error})`);
+            }
         };
 
         // 인식 종료 처리

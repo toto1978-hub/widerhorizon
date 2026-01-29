@@ -2,7 +2,7 @@
     "name": "팩트체크 (FactCheck)",
     "short_name": "팩트체크",
     "description": "어르신을 위한 쉬운 가짜뉴스 확인 앱",
-    "start_url": "/",
+    "start_url": "./index.html",
     "display": "standalone",
     "background_color": "#FFFFFF",
     "theme_color": "#2196F3",

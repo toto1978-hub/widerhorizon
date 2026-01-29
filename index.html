@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="어르신을 위한 전문적인 가짜뉴스 확인 서비스">
+    <meta name="theme-color" content="#0F172A">
+    <title>팩트와이즈 - 럭셔리 팩트체크</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="stylesheet" href="css/style.css?v=3.8">
+</head>
+
+<body>
+    <!-- 럭셔리 메쉬 배경 -->
+    <div class="bg-mesh"></div>
+    <div class="container">
+        <!-- 헤더 -->
+        <header class="header">
+            <div class="header-illustrations">
+                <img src="images/hero.png" alt="마스코트" class="hero-image">
+                <img src="images/grandpa.png" alt="마스코트" class="hero-image">
+            </div>
+            <h1 class="title">FACTWISE</h1>
+            <p class="subtitle">PREMIUM FACT-CHECK SERVICE</p>
+        </header>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+            <!-- 입력 영역 -->
+            <div class="input-card">
+                <label for="factInput" class="input-label">검증할 내용을 입력해 주세요</label>
+                <textarea id="factInput" class="fact-input"
+                    placeholder="의심스러운 소식이나 정보를 여기에 붙여넣으세요. 예: 바나나가 코로나 치료에 효과가 있다?" rows="4"></textarea>
+
+                <div class="button-group">
+                    <!-- 음성 입력 버튼 -->
+                    <button id="voiceBtn" class="btn btn-outline voice-btn" aria-label="음성으로 입력하기">
+                        <span>🎤</span>
+                        <span class="voice-text">음성 입력</span>
+                    </button>
+
+                    <!-- 확인하기 버튼 -->
+                    <button id="checkBtn" class="btn btn-primary">
+                        <span>🔍</span>
+                        <span class="check-text">팩트체크 시작</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 로딩 표시 -->
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p class="loading-text">데이터를 분석 중입니다...</p>
+            </div>
+
+            <!-- 결과 영역 -->
+            <div id="result" class="result-card hidden">
+                <div id="resultContent" class="result-content">
+                    <!-- 결과가 여기에 표시됩니다 -->
+                </div>
+
+                <button id="newCheckBtn" class="btn btn-outline" style="width: 100%; margin-top: 2rem;">
+                    새로운 내용 확인하기
+                </button>
+            </div>
+
+            <!-- 도움말 -->
+            <div class="help-card">
+                <details class="help-details">
+                    <summary class="help-summary">이용 안내 (자세히 보려면 클릭)</summary>
+                    <div class="help-content">
+                        <ol style="margin-left: 2rem; margin-top: 1.5rem;">
+                            <li>검증이 필요한 문장을 입력하거나 음성으로 말씀해 주세요.</li>
+                            <li>'팩트체크 시작'을 누르면 실시간 뉴스와 데이터를 분석합니다.</li>
+                            <li><strong>📱 스마트폰 설치:</strong> 브라우저 설정에서 '홈 화면에 추가'를 누르면 앱처럼 쓰실 수 있습니다.</li>
+                        </ol>
+                    </div>
+                </details>
+            </div>
+        </main>
+
+        <!-- 푸터 -->
+        <footer class="footer">
+            <p>© 2026 FactWise Luxury. 전문적인 팩트체크 정보를 제공합니다.</p>
+            <div class="version-info">
+                APP VERSION: <strong id="appVersion" style="color: var(--clr-luxury-gold);">3.8</strong> |
+                <button id="resetAppBtn" class="reset-btn">시스템 초기화</button>
+            </div>
+            <p style="font-size: 0.85rem; margin-top: 1rem; color: var(--clr-text-muted); opacity: 0.7;">* 정교한 분석을 위해
+                레이싱 엔진이 가동 중입니다.</p>
+        </footer>
+    </div>
+
+    <!-- 설치 안내 모달 -->
+    <div id="installModal" class="modal hidden">
+        <div class="modal-content">
+            <h2 class="result-title">이 앱을 설치하시겠습니까?</h2>
+            <p class="result-description">
+                홈 화면에 추가하여 더 쉽고 빠르게 가짜뉴스를 확인하실 수 있습니다.
+            </p>
+            <div class="button-group">
+                <button id="installBtn" class="btn btn-primary">지금 설치</button>
+                <button id="closeModalBtn" class="btn btn-outline">나중에</button>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="js/speech.js?v=3.8"></script>
+    <script src="js/fact-data.js?v=3.8"></script>
+    <script src="js/factcheck.js?v=3.8"></script>
+    <script src="js/app.js?v=3.8"></script>
+
+    <!-- Service Worker 등록 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker 등록 성공:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker 등록 실패:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+
+</html>

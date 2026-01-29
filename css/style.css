@@ -1,0 +1,464 @@
+/* WiderHorizon Luxury Edition v3.0 - 로열 & 프리미엄 스타일 */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+
+:root {
+    /* Luxury Color Palette */
+    --clr-luxury-indigo: #1E1B4B;
+    --clr-luxury-violet: #4C1D95;
+    --clr-luxury-gold: #D4AF37;
+    --clr-luxury-gold-light: #F3E5AB;
+    --clr-luxury-slate: #0F172A;
+
+    --clr-brand: #6366F1;
+    --clr-gold-gradient: linear-gradient(135deg, #D4AF37 0%, #F3E5AB 50%, #C5A028 100%);
+
+    --clr-text-main: #FFFFFF;
+    --clr-text-muted: #CBD5E1;
+
+    /* Advanced Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.08);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-shadow: 0 15px 45px 0 rgba(0, 0, 0, 0.4);
+
+    --radius-xl: 32px;
+    --radius-lg: 24px;
+
+    --transition-premium: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    color: var(--clr-text-main);
+    background: var(--clr-luxury-slate);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Animated Mesh Gradient Background */
+.bg-mesh {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at 0% 0%, #1e1b4b 0%, transparent 50%),
+        radial-gradient(circle at 100% 0%, #4c1d95 0%, transparent 50%),
+        radial-gradient(circle at 100% 100%, #1e1b4b 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, #312e81 0%, transparent 50%);
+    opacity: 0.8;
+    filter: blur(80px);
+    animation: meshMove 20s ease infinite alternate;
+}
+
+@keyframes meshMove {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.1);
+    }
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Header Section */
+.header {
+    text-align: center;
+    padding: 4rem 0 3rem;
+    animation: luxuryFadeIn 1.2s ease-out;
+}
+
+@keyframes luxuryFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header-illustrations {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.hero-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid var(--clr-luxury-gold);
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+    object-fit: cover;
+    object-fit: cover;
+    transition: var(--transition-premium);
+    animation: floating 3s ease-in-out infinite;
+}
+
+.hero-image:hover {
+    transform: scale(1.1) translateY(-10px);
+    box-shadow: 0 0 50px rgba(212, 175, 55, 0.5);
+}
+
+.title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    background: var(--clr-gold-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+}
+
+.settings-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--clr-text-muted);
+    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition-premium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings-btn:hover {
+    background: rgba(212, 175, 55, 0.1);
+    color: var(--clr-luxury-gold);
+    border-color: var(--clr-luxury-gold);
+    transform: rotate(90deg);
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--clr-text-muted);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+/* Luxury Card System */
+.input-card,
+.result-card,
+.help-details {
+    background: var(--glass-bg);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-xl);
+    padding: 3rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--glass-shadow);
+    transition: var(--transition-premium);
+}
+
+.help-summary {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--clr-luxury-gold-light);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.help-summary::before {
+    content: '📘';
+    font-size: 1.4rem;
+}
+
+.help-content {
+    font-size: 1.35rem;
+    color: var(--clr-text-muted);
+    line-height: 1.8;
+}
+
+.help-content li {
+    margin-bottom: 1.2rem;
+}
+
+.input-card:hover {
+    border-color: rgba(212, 175, 55, 0.4);
+    transform: translateY(-5px);
+}
+
+.input-label {
+    display: block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--clr-luxury-gold-light);
+}
+
+.fact-input {
+    width: 100%;
+    min-height: 180px;
+    background: rgba(15, 23, 42, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    font-size: 1.4rem;
+    color: white;
+    font-family: inherit;
+    transition: var(--transition-premium);
+    resize: none;
+}
+
+.fact-input:focus {
+    outline: none;
+    border-color: var(--clr-luxury-gold);
+    background: rgba(15, 23, 42, 0.6);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+/* Premium Buttons */
+.button-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.btn {
+    flex: 1;
+    padding: 1.4rem 1rem;
+    border-radius: var(--radius-lg);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition-premium);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.8rem;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background: var(--clr-gold-gradient);
+    color: #1E1B4B;
+    box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+}
+
+.btn-primary:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.5);
+}
+
+.btn-outline {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--clr-luxury-gold-light);
+    border: 2px solid rgba(212, 175, 55, 0.3);
+}
+
+.btn-outline:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--clr-luxury-gold);
+}
+
+/* Results Display */
+.result-card {
+    border: 2px solid rgba(212, 175, 55, 0.2);
+}
+
+.result-badge {
+    padding: 0.8rem 2.5rem;
+    border-radius: 100px;
+    font-weight: 800;
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    display: inline-block;
+}
+
+.badge-true {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34D399;
+    border: 1px solid #059669;
+}
+
+.badge-false {
+    background: rgba(244, 63, 94, 0.2);
+    color: #FB7185;
+    border: 1px solid #E11D48;
+}
+
+.badge-uncertain {
+    background: rgba(245, 158, 11, 0.2);
+    color: #FBBF24;
+    border: 1px solid #D97706;
+}
+
+.result-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.25;
+}
+
+.result-description {
+    font-size: 1.3rem;
+    color: var(--clr-text-muted);
+    margin-bottom: 2rem;
+}
+
+/* Luxury Loader */
+.loading-content {
+    text-align: center;
+    padding: 3rem;
+}
+
+.spinner {
+    width: 80px;
+    height: 80px;
+    border: 4px solid rgba(212, 175, 55, 0.1);
+    border-top: 4px solid var(--clr-luxury-gold);
+    border-radius: 50%;
+    animation: luxurySpin 1s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    margin: 0 auto 2rem;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+}
+
+@keyframes luxurySpin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Reset & Footer */
+.footer {
+    text-align: center;
+    padding: 5rem 0;
+    color: var(--clr-text-muted);
+}
+
+.version-info {
+    font-size: 1rem;
+    opacity: 0.6;
+    margin-top: 2rem;
+}
+
+.reset-btn {
+    background: none;
+    border: none;
+    color: var(--clr-luxury-gold);
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.source-link {
+    display: block;
+    color: var(--clr-brand);
+    text-decoration: none;
+    font-size: 1.15rem;
+    margin-bottom: 1.2rem;
+    padding: 1.2rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: var(--transition-premium);
+}
+
+.source-link:hover {
+    color: var(--clr-luxury-gold-light);
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--clr-luxury-gold);
+    transform: translateX(10px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .container {
+        padding: 1.5rem 1rem;
+    }
+
+    .title {
+        font-size: 2.8rem;
+    }
+
+    .input-card {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .btn {
+        padding: 1.2rem;
+        font-size: 1.2rem;
+    }
+}
+
+/* Settings Form */
+.settings-form {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--clr-luxury-gold-light);
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    color: white;
+    font-family: inherit;
+    transition: var(--transition-premium);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--clr-luxury-gold);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}

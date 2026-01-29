@@ -1,12 +1,31 @@
 // 메인 애플리케이션
 class FactCheckApp {
     constructor() {
-        this.speechRecognition = new window.FactCheckVoice();
+        // 안전 장치: 음성인식 초기화 중 에러가 나도 앱은 죽지 않게 함
+        try {
+            if (window.FactCheckVoice) {
+                this.speechRecognition = new window.FactCheckVoice();
+            } else {
+                console.warn('FactCheckVoice class not found. Speech recognition disabled.');
+                this.speechRecognition = { start: () => { }, stop: () => { }, speak: () => { }, stopSpeaking: () => { } }; // 더미 객체
+            }
+        } catch (e) {
+            console.error('Speech recognition init failed:', e);
+            this.speechRecognition = { start: () => { }, stop: () => { }, speak: () => { }, stopSpeaking: () => { } }; // 더미 객체
+        }
+
         this.factChecker = new window.FactChecker();
         this.deferredPrompt = null;
 
         this.initElements();
-        this.initEventListeners();
+
+        // 요소 초기화 후 안전하게 이벤트 리스너 등록
+        try {
+            this.initEventListeners();
+        } catch (e) {
+            console.error('Event listeners init failed:', e);
+        }
+
         this.initPWA();
     }
 

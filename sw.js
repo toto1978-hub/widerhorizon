@@ -1,12 +1,12 @@
-// Service Worker - 오프라인 지원
-const CACHE_NAME = 'factwise-v3.8';
+const CACHE_NAME = 'factwise-v4.9';
 const urlsToCache = [
     '/',
     '/index.html',
-    '/css/style.css?v=3.8',
-    '/js/app.js?v=3.8',
-    '/js/speech.js?v=3.8',
-    '/js/factcheck.js?v=3.8'
+    '/css/style.css?v=4.9',
+    '/js/app.js?v=4.9',
+    '/js/speech.js?v=4.9',
+    '/js/fact-data.js?v=4.9',
+    '/js/factcheck.js?v=4.9'
 ];
 
 // 설치 이벤트

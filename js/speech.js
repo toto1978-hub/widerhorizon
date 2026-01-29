@@ -62,26 +62,45 @@ class SpeechRecognition {
         };
 
         this.recognition.onerror = (event) => {
-            this.isListening = false;
             console.error('Speech recognition error:', event.error);
 
             let errorMessage = '음성 인식 중 오류가 발생했습니다.';
 
             switch (event.error) {
                 case 'no-speech':
-                    errorMessage = '음성이 감지되지 않았습니다. 다시 시도해주세요.';
-                    break;
+                    // no-speech 에러는 자동 재시작 (더 오래 기다리기 위해)
+                    console.log('No speech detected, restarting...');
+                    if (this.isListening) {
+                        // 잠시 후 재시작
+                        setTimeout(() => {
+                            if (this.isListening) {
+                                try {
+                                    this.recognition.start();
+                                } catch (e) {
+                                    console.error('Failed to restart recognition:', e);
+                                }
+                            }
+                        }, 100);
+                    }
+                    return; // 에러 메시지 표시하지 않음
                 case 'audio-capture':
                     errorMessage = '마이크를 찾을 수 없습니다. 마이크를 연결해주세요.';
+                    this.isListening = false;
                     break;
                 case 'not-allowed':
                     errorMessage = '마이크 사용 권한이 필요합니다. 브라우저 설정에서 권한을 허용해주세요.';
+                    this.isListening = false;
                     break;
                 case 'network':
                     errorMessage = '인터넷 연결을 확인해주세요.';
+                    this.isListening = false;
                     break;
                 case 'aborted':
                     errorMessage = null; // 사용자가 중단한 경우 메시지 생략
+                    this.isListening = false;
+                    break;
+                default:
+                    this.isListening = false;
                     break;
             }
 
@@ -90,7 +109,20 @@ class SpeechRecognition {
 
         // 인식 종료 처리
         this.recognition.onend = () => {
-            this.isListening = false;
+            // continuous 모드에서 자동 재시작
+            if (this.isListening) {
+                console.log('Recognition ended, restarting...');
+                setTimeout(() => {
+                    if (this.isListening) {
+                        try {
+                            this.recognition.start();
+                        } catch (e) {
+                            console.error('Failed to restart recognition:', e);
+                            this.isListening = false;
+                        }
+                    }
+                }, 100);
+            }
         };
 
         try {

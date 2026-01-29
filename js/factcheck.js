@@ -437,64 +437,36 @@ class FactChecker {
     checkCommonKnowledge(text) {
         const textLower = text.toLowerCase();
 
-                ]
-    },
-            {
-    keywords: ['서울', '시장', '오세훈'],
-        verdict: 'true',
-            title: '서울특별시장은 오세훈입니다',
-                description: '현재(2026년 기준) 서울특별시의 시장은 오세훈입니다.',
-                    sources: [
-                        { title: '서울특별시청 공식 홈페이지', url: 'https://www.seoul.go.kr' }
-                    ]
-},
-{
-    keywords: ['부산', '시장', '박형준'],
-        verdict: 'true',
-            title: '부산광역시장은 박형준입니다',
-                description: '현재(2026년 기준) 부산광역시의 시장은 박형준입니다.',
-                    sources: [
-                        { title: '부산광역시청 공식 홈페이지', url: 'https://www.busan.go.kr' }
-                    ]
-},
-{
-    keywords: ['세종', '행정중심복합도시', '특별자치시'],
-        verdict: 'true',
-            title: '세종시는 행정중심복합도시입니다',
-                description: '세종특별자치시는 대한민국의 행정 기능을 분담하는 행정중심복합도시입니다.',
-                    sources: [
-                        { title: '세종특별자치시청', url: 'https://www.sejong.go.kr' }
-                    ]
-}
-        ];
+        // fact-data.js에 정의된 OBVIOUS_FACTS 사용
+        const obviousFacts = window.OBVIOUS_FACTS || [];
 
-// 키워드 매칭
-for (const fact of obviousFacts) {
-    const matchedKeywords = fact.keywords.filter(keyword => textLower.includes(keyword));
-    const matchCount = matchedKeywords.length;
+        // 키워드 매칭
+        for (const fact of obviousFacts) {
+            const matchedKeywords = fact.keywords.filter(keyword => textLower.includes(keyword));
+            const matchCount = matchedKeywords.length;
 
-    // 판정 로직 개선:
-    // 1. 키워드가 2개 이상 포함된 경우 (강력 매칭)
-    // 2. 입력문의 길이가 짧고 핵심 키워드가 2글자 이상인 상태에서 매칭된 경우
-    // (1글자 키워드 '공' 등이 '공산주의'에 매칭되는 오류 방지)
-    const matchedLongKeywords = matchedKeywords.filter(k => k.length >= 2);
+            // 판정 로직 개선:
+            // 1. 키워드가 2개 이상 포함된 경우 (강력 매칭)
+            // 2. 입력문의 길이가 짧고 핵심 키워드가 2글자 이상인 상태에서 매칭된 경우
+            // (1글자 키워드 '공' 등이 '공산주의'에 매칭되는 오류 방지)
+            const matchedLongKeywords = matchedKeywords.filter(k => k.length >= 2);
 
-    const isShortMatch = text.length < 15 && matchedLongKeywords.length >= 1;
-    const isStrongMatch = matchCount >= 2;
+            const isShortMatch = text.length < 15 && matchedLongKeywords.length >= 1;
+            const isStrongMatch = matchCount >= 2;
 
-    if (isStrongMatch || isShortMatch) {
-        return {
-            verdict: fact.verdict,
-            confidence: 'high',
-            title: fact.title,
-            description: fact.description,
-            sources: fact.sources,
-            searchQuery: text
-        };
-    }
-}
+            if (isStrongMatch || isShortMatch) {
+                return {
+                    verdict: fact.verdict,
+                    confidence: 'high',
+                    title: fact.title,
+                    description: fact.description,
+                    sources: fact.sources,
+                    searchQuery: text
+                };
+            }
+        }
 
-return null;
+        return null;
     }
 }
 

@@ -93,7 +93,11 @@ class FactCheckVoice {
                     this.isListening = false;
                     break;
                 case 'network':
-                    errorMessage = '인터넷 연결을 확인해주세요.';
+                    errorMessage = '네트워크 연결 상태를 확인해주세요. (구글 서버 연결 실패)';
+                    this.isListening = false;
+                    break;
+                case 'service-not-allowed':
+                    errorMessage = '브라우저가 음성 인식을 차단했습니다.<br><br>1. <strong>Chrome 브라우저</strong>를 사용해주세요.<br>2. <strong>HTTPS 보안 연결</strong>인지 확인해주세요.<br>3. 광고 차단기나 백신이 막고 있을 수 있습니다.';
                     this.isListening = false;
                     break;
                 case 'aborted':

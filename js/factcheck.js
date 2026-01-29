@@ -1,7 +1,7 @@
 // 팩트체크 기능
 class FactChecker {
     constructor() {
-        this.version = '3.8'; // 키워드 오매칭 수정 및 정치 상식 보강 (v3.8)
+        this.version = '4.5'; // 시스템 안정화 및 음성인식 복구 완료 (v4.5)
         this.cache = this.loadCache();
 
         // API 키 설정 (직접 입력)

@@ -24,8 +24,8 @@ class FactCheckVoice {
         // 한국어 설정
         this.recognition.lang = 'ko-KR';
 
-        // 연속 인식 (사용자 요청: 너무 빨리 끊기지 않게)
-        this.recognition.continuous = true;
+        // 연속 인식 (false: 말 끝나면 자동 종료)
+        this.recognition.continuous = false;
 
         // 중간 결과 표시
         this.recognition.interimResults = true;

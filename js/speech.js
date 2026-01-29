@@ -1,14 +1,15 @@
+// 네이티브 SpeechRecognition API 참조 저장 (이름 충돌 방지)
+const NativeSpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
 // 음성 인식 기능
-class SpeechRecognition {
+class FactCheckVoice {
     constructor() {
         // 브라우저 호환성 확인
         this.recognition = null;
         this.isListening = false;
 
-        if ('webkitSpeechRecognition' in window) {
-            this.recognition = new webkitSpeechRecognition();
-        } else if ('SpeechRecognition' in window) {
-            this.recognition = new window.SpeechRecognition();
+        if (NativeSpeechRecognition) {
+            this.recognition = new NativeSpeechRecognition();
         }
 
         if (this.recognition) {
@@ -164,4 +165,4 @@ class SpeechRecognition {
 }
 
 // 전역으로 내보내기
-window.SpeechRecognition = SpeechRecognition;
+window.FactCheckVoice = FactCheckVoice;

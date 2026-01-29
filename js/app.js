@@ -1,7 +1,7 @@
 // 메인 애플리케이션
 class FactCheckApp {
     constructor() {
-        this.speechRecognition = new window.SpeechRecognition();
+        this.speechRecognition = new window.FactCheckVoice();
         this.factChecker = new window.FactChecker();
         this.deferredPrompt = null;
 

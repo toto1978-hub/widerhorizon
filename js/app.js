@@ -214,7 +214,16 @@ class FactCheckApp {
                     this.voiceBtn.querySelector('.voice-text').textContent = '음성으로 말하기';
                 }
                 if (error && error !== 'no-speech' && error !== 'aborted') {
-                    alert(error);
+                    console.error('음성 인식 오류:', error);
+                    // alert 대신 디버그 패널 사용
+                    const debugConsole = document.getElementById('debugConsole');
+                    const debugMessage = document.getElementById('debugMessage');
+                    if (debugConsole && debugMessage) {
+                        debugMessage.textContent = error;
+                        debugConsole.style.display = 'block';
+                    } else {
+                        alert(error); // 패널이 없으면 백업으로 alert
+                    }
                 }
             }
         );

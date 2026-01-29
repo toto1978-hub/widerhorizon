@@ -1,32 +1,65 @@
 // 메인 애플리케이션
 class FactCheckApp {
     constructor() {
-        // 안전 장치: 음성인식 초기화 중 에러가 나도 앱은 죽지 않게 함
+        // 1. 음성인식 초기화 (안전 장치 적용)
         try {
             if (window.FactCheckVoice) {
                 this.speechRecognition = new window.FactCheckVoice();
             } else {
-                console.warn('FactCheckVoice class not found. Speech recognition disabled.');
-                this.speechRecognition = { start: () => { }, stop: () => { }, speak: () => { }, stopSpeaking: () => { } }; // 더미 객체
+                console.warn('FactCheckVoice class not found.');
+                this.createDummySpeechRecognition();
             }
         } catch (e) {
             console.error('Speech recognition init failed:', e);
-            this.speechRecognition = { start: () => { }, stop: () => { }, speak: () => { }, stopSpeaking: () => { } }; // 더미 객체
+            this.createDummySpeechRecognition();
         }
 
-        this.factChecker = new window.FactChecker();
+        // 2. 팩트체커 초기화 (안전 장치 적용)
+        try {
+            if (window.FactChecker) {
+                this.factChecker = new window.FactChecker();
+            } else {
+                console.error('FactChecker class not found.');
+                this.factChecker = { version: 'Error', check: async () => ({ title: '오류', description: '팩트체크 기능 초기화 실패', verdict: 'uncertain' }), clearCache: () => { } };
+            }
+        } catch (e) {
+            console.error('FactChecker init failed:', e);
+            this.factChecker = { version: 'Error', check: async () => ({ title: '오류', description: '팩트체크 기능 초기화 실패', verdict: 'uncertain' }), clearCache: () => { } };
+        }
+
         this.deferredPrompt = null;
 
-        this.initElements();
+        // 3. UI 요소 초기화 (필수)
+        try {
+            this.initElements();
+        } catch (e) {
+            console.error('Element initialization failed:', e);
+            alert('앱 UI 초기화 중 오류가 발생했습니다. 페이지를 새로고침해주세요.');
+        }
 
-        // 요소 초기화 후 안전하게 이벤트 리스너 등록
+        // 4. 이벤트 리스너 등록 (필수 - 초기화 버튼 등)
         try {
             this.initEventListeners();
         } catch (e) {
             console.error('Event listeners init failed:', e);
         }
 
-        this.initPWA();
+        // 5. PWA 기능 (선택적)
+        try {
+            this.initPWA();
+        } catch (e) {
+            console.warn('PWA init failed:', e);
+        }
+    }
+
+    createDummySpeechRecognition() {
+        this.speechRecognition = {
+            start: () => alert('음성 인식 기능을 사용할 수 없습니다.'),
+            stop: () => { },
+            speak: () => { },
+            stopSpeaking: () => { },
+            isListening: false
+        };
     }
 
     initElements() {
@@ -50,56 +83,72 @@ class FactCheckApp {
         this.installBtn = document.getElementById('installBtn');
         this.closeModalBtn = document.getElementById('closeModalBtn');
 
-        // 버전 표시
-        if (this.appVersionEl) {
-            this.appVersionEl.textContent = this.factChecker.version;
+        // 버전 표시 - factChecker가 에러 상태여도 작동해야 함
+        if (this.appVersionEl && this.factChecker) {
+            this.appVersionEl.textContent = this.factChecker.version || '4.3';
         }
     }
 
     initEventListeners() {
-        // 음성 입력 버튼
-        this.voiceBtn.addEventListener('click', () => this.handleVoiceInput());
+        // null 체크를 포함한 안전한 이벤트 리스너 등록
+        if (this.voiceBtn) {
+            this.voiceBtn.addEventListener('click', () => {
+                try { this.handleVoiceInput(); } catch (e) { console.error(e); alert('음성 입력 오류'); }
+            });
+        }
 
-        // 확인하기 버튼
-        this.checkBtn.addEventListener('click', () => this.handleCheck());
+        if (this.checkBtn) {
+            this.checkBtn.addEventListener('click', () => {
+                try { this.handleCheck(); } catch (e) { console.error(e); }
+            });
+        }
 
-        // 새로 확인하기 버튼
-        this.newCheckBtn.addEventListener('click', () => this.resetForm());
+        if (this.newCheckBtn) {
+            this.newCheckBtn.addEventListener('click', () => this.resetForm());
+        }
 
-        // 시스템 초기화 버튼
+        // 시스템 초기화 버튼 - 가장 중요!
         if (this.resetAppBtn) {
             this.resetAppBtn.addEventListener('click', () => {
                 if (confirm('모든 기록을 초기화하고 앱을 다시 시작할까요?')) {
-                    this.factChecker.clearCache();
-                    location.reload(true);
+                    try {
+                        if (this.factChecker) this.factChecker.clearCache();
+                        location.reload(true);
+                    } catch (e) {
+                        alert('초기화 중 오류가 발생했으나 강제로 새로고침합니다.');
+                        location.reload(true);
+                    }
                 }
             });
         }
 
-        // Enter 키로 확인
-        this.factInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                this.handleCheck();
-            }
-        });
+        if (this.factInput) {
+            this.factInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter' && !e.shiftKey) {
+                    e.preventDefault();
+                    this.handleCheck();
+                }
+            });
+        }
 
-        // PWA 설치 버튼
         if (this.installBtn) {
-            this.installBtn.addEventListener('click', () => this.handleInstall());
+            this.installBtn.addEventListener('click', () => {
+                try { this.handleInstall(); } catch (e) { console.error(e); }
+            });
         }
 
         if (this.closeModalBtn) {
             this.closeModalBtn.addEventListener('click', () => this.hideInstallModal());
         }
 
-        // 음성 출력 잠금 해제 (모바일 브라우저 대응)
+        // 음성 출력 잠금 해제
         const unlockAudio = () => {
-            if (this.speechRecognition.synth) {
-                const u = new SpeechSynthesisUtterance('');
-                this.speechRecognition.synth.speak(u);
-                console.log('Audio unlocked');
-            }
+            try {
+                if (this.speechRecognition && this.speechRecognition.synth) {
+                    const u = new SpeechSynthesisUtterance('');
+                    this.speechRecognition.synth.speak(u);
+                }
+            } catch (e) { }
             document.removeEventListener('click', unlockAudio);
             document.removeEventListener('touchstart', unlockAudio);
         };
@@ -108,12 +157,9 @@ class FactCheckApp {
     }
 
     initPWA() {
-        // PWA 설치 프롬프트 캡처
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             this.deferredPrompt = e;
-
-            // 설치 모달 표시 (처음 방문 시)
             const hasSeenModal = localStorage.getItem('hasSeenInstallModal');
             if (!hasSeenModal) {
                 setTimeout(() => this.showInstallModal(), 3000);
@@ -121,7 +167,6 @@ class FactCheckApp {
             }
         });
 
-        // 설치 완료 이벤트
         window.addEventListener('appinstalled', () => {
             console.log('PWA 설치 완료');
             this.deferredPrompt = null;
@@ -129,15 +174,11 @@ class FactCheckApp {
     }
 
     showInstallModal() {
-        if (this.installModal) {
-            this.installModal.classList.remove('hidden');
-        }
+        if (this.installModal) this.installModal.classList.remove('hidden');
     }
 
     hideInstallModal() {
-        if (this.installModal) {
-            this.installModal.classList.add('hidden');
-        }
+        if (this.installModal) this.installModal.classList.add('hidden');
     }
 
     async handleInstall() {
@@ -146,12 +187,9 @@ class FactCheckApp {
             this.hideInstallModal();
             return;
         }
-
         this.deferredPrompt.prompt();
         const { outcome } = await this.deferredPrompt.userChoice;
-
         console.log(`설치 결과: ${outcome}`);
-        alert(`PWA 설치 결과: ${outcome === 'accepted' ? '성공적으로 설치되었습니다!' : '설치가 취소되었습니다.'}`);
         this.deferredPrompt = null;
         this.hideInstallModal();
     }
@@ -162,21 +200,19 @@ class FactCheckApp {
             return;
         }
 
-        // 음성 출력 중단 (충돌 방지)
         this.speechRecognition.stopSpeaking();
-
         this.voiceBtn.classList.add('listening');
         this.voiceBtn.querySelector('.voice-text').textContent = '듣는 중... (클릭하여 완료)';
 
-        // 음성 인식 시작 (continuous 모드이므로 수동으로 멈출 때까지 계속 듣거나 브라우저 타임아웃까지 대기)
         this.speechRecognition.start(
             (transcript, isFinal) => {
-                this.factInput.value = transcript;
+                if (this.factInput) this.factInput.value = transcript;
             },
             (error) => {
-                this.voiceBtn.classList.remove('listening');
-                this.voiceBtn.querySelector('.voice-text').textContent = '음성으로 말하기';
-
+                if (this.voiceBtn) {
+                    this.voiceBtn.classList.remove('listening');
+                    this.voiceBtn.querySelector('.voice-text').textContent = '음성으로 말하기';
+                }
                 if (error && error !== 'no-speech' && error !== 'aborted') {
                     alert(error);
                 }
@@ -186,21 +222,14 @@ class FactCheckApp {
 
     async handleCheck() {
         const text = this.factInput.value.trim();
-
         if (!text) {
             alert('확인할 내용을 입력해주세요.');
             this.factInput.focus();
             return;
         }
-
-        // UI 업데이트
         this.showLoading();
-
         try {
-            // 팩트체크 실행
             const result = await this.factChecker.check(text);
-
-            // 결과 표시
             this.showResult(result);
         } catch (error) {
             this.hideLoading();
@@ -209,37 +238,39 @@ class FactCheckApp {
     }
 
     showLoading() {
-        this.checkBtn.disabled = true;
-        this.loading.classList.remove('hidden');
-        this.result.classList.add('hidden');
+        if (this.checkBtn) this.checkBtn.disabled = true;
+        if (this.loading) this.loading.classList.remove('hidden');
+        if (this.result) this.result.classList.add('hidden');
     }
 
     hideLoading() {
-        this.checkBtn.disabled = false;
-        this.loading.classList.add('hidden');
+        if (this.checkBtn) this.checkBtn.disabled = false;
+        if (this.loading) this.loading.classList.add('hidden');
     }
 
     showResult(result) {
         this.hideLoading();
+        // TTS
+        try {
+            const speechText = `${result.title}. ${result.description}`;
+            this.speechRecognition.speak(speechText);
+        } catch (e) { }
 
-        // 럭셔리: 결과 읽어주기 (TTS)
-        const speechText = `${result.title}. ${result.description}`;
-        this.speechRecognition.speak(speechText);
-
-        // 결과 HTML 생성
         const html = this.generateResultHTML(result);
-        this.resultContent.innerHTML = html;
+        if (this.resultContent) this.resultContent.innerHTML = html;
+        if (this.result) {
+            this.result.classList.remove('hidden');
+            this.result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
 
-        // 결과 영역 표시
-        this.result.classList.remove('hidden');
-
-        // 결과로 스크롤
-        this.result.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-        // 다시 듣기 버튼 이벤트 연결
         const replayBtn = document.getElementById('replayVoiceBtn');
         if (replayBtn) {
-            replayBtn.addEventListener('click', () => this.speechRecognition.speak(speechText));
+            replayBtn.addEventListener('click', () => {
+                try {
+                    const speechText = `${result.title}. ${result.description}`;
+                    this.speechRecognition.speak(speechText);
+                } catch (e) { }
+            });
         }
     }
 
@@ -270,7 +301,6 @@ class FactCheckApp {
             </button>
         `;
 
-        // 출처 링크 (한 칸 비우고 출력하도록 여백 추가)
         if (result.sources && result.sources.length > 0) {
             html += `
                 <div class="result-sources" style="margin-top: 3rem; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem;">
@@ -292,18 +322,28 @@ class FactCheckApp {
     }
 
     resetForm() {
-        this.factInput.value = '';
-        this.result.classList.add('hidden');
-        this.factInput.focus();
-
-        // 상단으로 스크롤
+        if (this.factInput) this.factInput.value = '';
+        if (this.result) this.result.classList.add('hidden');
+        if (this.factInput) this.factInput.focus();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
-// DOM 로드 완료 후 앱 초기화
+// DOM 로드 완료 후 앱 초기화 (비상 안전 장치 포함)
 document.addEventListener('DOMContentLoaded', () => {
-    console.clear();
-    console.log('%c[FactWise Luxury v3.0] 레이싱 엔진 가동됨', 'color: #D4AF37; font-weight: bold; font-size: 14px; text-shadow: 0 0 5px rgba(212,175,55,0.5);');
-    const app = new FactCheckApp();
+    console.log('%c[FactWise Luxury v4.3] 시작...', 'color: #D4AF37; font-weight: bold;');
+    try {
+        window.app = new FactCheckApp();
+    } catch (e) {
+        console.error('CRITICAL: 앱 초기화 대실패', e);
+        alert('앱을 시작하는 도중 심각한 오류가 발생했습니다. 확인을 누르면 시스템을 초기화합니다.');
+        // 비상 초기화
+        localStorage.clear();
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.getRegistrations().then(registrations => {
+                for (let registration of registrations) registration.unregister();
+            });
+        }
+        location.reload(true);
+    }
 });

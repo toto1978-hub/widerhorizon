@@ -270,16 +270,24 @@ class FactChecker {
 
     // 일반적인 가짜뉴스 데이터베이스
     async checkWithCommonFakeNews(text) {
-        // fact-data.js에 정의된 COMMON_FAKE_NEWS 사용
         const commonFakeNews = window.COMMON_FAKE_NEWS || [];
-
         const textLower = text.toLowerCase();
+        const textNoSpace = textLower.replace(/\s+/g, ''); // 공백 제거 버전
 
         // 키워드 매칭
         for (const fakeNews of commonFakeNews) {
-            const matchCount = fakeNews.keywords.filter(keyword =>
+            // 1. 일반 매칭 (원문 기준)
+            let matchCount = fakeNews.keywords.filter(keyword =>
                 textLower.includes(keyword)
             ).length;
+
+            // 2. 공백 제거 매칭 (보조) - 키워드 자체가 문장에 녹아있는 경우
+            if (matchCount < 2) {
+                const matchCountNoSpace = fakeNews.keywords.filter(keyword =>
+                    textNoSpace.includes(keyword)
+                ).length;
+                if (matchCountNoSpace > matchCount) matchCount = matchCountNoSpace;
+            }
 
             // 2개 이상의 키워드가 매칭되면 해당 가짜뉴스로 판단
             if (matchCount >= 2) {

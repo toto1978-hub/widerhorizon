@@ -2,8 +2,6 @@
 class FactCheckApp {
     constructor() {
         this.speechRecognition = new window.SpeechRecognition();
-        this.speechRecognition.continuous = true; // 끊김 방지를 위해 연속 모드 설정
-        this.speechRecognition.interimResults = true; // 중간 결과 확인
         this.factChecker = new window.FactChecker();
         this.deferredPrompt = null;
 

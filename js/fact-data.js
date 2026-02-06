@@ -475,3 +475,7 @@ const OBVIOUS_FACTS = [
         ]
     }
 ];
+
+// 전역으로 노출
+window.COMMON_FAKE_NEWS = COMMON_FAKE_NEWS;
+window.OBVIOUS_FACTS = OBVIOUS_FACTS;

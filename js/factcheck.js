@@ -1,7 +1,7 @@
 // 팩트체크 기능
 class FactChecker {
     constructor() {
-        this.version = '4.13'; // 로직 개선 - COMMON_FAKE_NEWS 로컬 체크 추가
+        this.version = '4.14'; // fact-data.js 전역 노출 버그 수정
         this.cache = this.loadCache();
 
         // API 키 설정 (직접 입력)

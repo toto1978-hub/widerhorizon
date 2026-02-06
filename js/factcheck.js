@@ -1,7 +1,7 @@
 // 팩트체크 기능
 class FactChecker {
     constructor() {
-        this.version = '4.5'; // 시스템 안정화 및 음성인식 복구 완료 (v4.5)
+        this.version = '4.13'; // 로직 개선 - COMMON_FAKE_NEWS 로컬 체크 추가
         this.cache = this.loadCache();
 
         // API 키 설정 (직접 입력)
@@ -444,19 +444,33 @@ class FactChecker {
     // 일반 상식 판단
     checkCommonKnowledge(text) {
         const textLower = text.toLowerCase();
+        const textNoSpace = textLower.replace(/\s+/g, ''); // 공백 제거 버전
 
-        // fact-data.js에 정의된 OBVIOUS_FACTS 사용
+        // fact-data.js에 정의된 데이터 사용
         const obviousFacts = window.OBVIOUS_FACTS || [];
+        const commonFakeNews = window.COMMON_FAKE_NEWS || [];
+
+        // 두 배열을 모두 체크
+        const allFacts = [...obviousFacts, ...commonFakeNews];
 
         // 키워드 매칭
-        for (const fact of obviousFacts) {
-            const matchedKeywords = fact.keywords.filter(keyword => textLower.includes(keyword));
-            const matchCount = matchedKeywords.length;
+        for (const fact of allFacts) {
+            // 1. 일반 매칭 (원문 기준)
+            let matchedKeywords = fact.keywords.filter(keyword => textLower.includes(keyword));
+            let matchCount = matchedKeywords.length;
 
-            // 판정 로직 개선:
+            // 2. 공백 제거 매칭 (보조)
+            if (matchCount < 2) {
+                const matchedNoSpace = fact.keywords.filter(keyword => textNoSpace.includes(keyword));
+                if (matchedNoSpace.length > matchCount) {
+                    matchedKeywords = matchedNoSpace;
+                    matchCount = matchedNoSpace.length;
+                }
+            }
+
+            // 판정 로직:
             // 1. 키워드가 2개 이상 포함된 경우 (강력 매칭)
             // 2. 입력문의 길이가 짧고 핵심 키워드가 2글자 이상인 상태에서 매칭된 경우
-            // (1글자 키워드 '공' 등이 '공산주의'에 매칭되는 오류 방지)
             const matchedLongKeywords = matchedKeywords.filter(k => k.length >= 2);
 
             const isShortMatch = text.length < 15 && matchedLongKeywords.length >= 1;

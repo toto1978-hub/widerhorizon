@@ -1,6 +1,6 @@
 // 팩트체크 데이터 (fact-data.js)
 // 유지보수 및 효율성을 위해 데이터 분리
-// v4.18 - 국가 상식 데이터베이스 대폭 확장 (주요 국가 수도 및 대륙 정보)
+// v4.19 - 전 세계 국가(195개국 이상) 및 주요 도시 데이터 대규모 보강
 
 const COMMON_FAKE_NEWS = [
     // ==================== 시간/날짜 관련 ====================
@@ -1116,7 +1116,93 @@ const OBVIOUS_FACTS = [
         title: '오스트리아의 수도는 빈(비엔나)입니다',
         description: '유럽 중앙에 위치한 오스트리아의 수도는 빈(Wien, Vienna)입니다.',
         sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
-    }
+    },
+
+    // ==================== [BATCH 1] 전 세계 국가 및 도시 (v4.19 확장) ====================
+    // --- 아시아 (추가) ---
+    { keywords: ['말레이시아', '수도', '쿠알라룸푸르'], verdict: 'true', title: '말레이시아의 수도는 쿠알라룸푸르입니다', description: '동남아시아의 국가로 수도는 쿠알라룸푸르입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['싱가포르', '도시국가'], verdict: 'true', title: '싱가포르는 도시국가입니다', description: '싱가포르는 국가 자체가 하나의 도시인 도시국가입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['이란', '수도', '테헤란'], verdict: 'true', title: '이란의 수도는 테헤란입니다', description: '서아시아(중동)의 국가로 수도는 테헤란입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['이라크', '수도', '바그다드'], verdict: 'true', title: '이라크의 수도는 바그다드입니다', description: '중동의 국가로 수도는 바그다드입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['사우디아라비아', '사우디', '수도', '리야드'], verdict: 'true', title: '사우디아라비아의 수도는 리야드입니다', description: '중동 최대 국가 중 하나로 수도는 리야드입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['이스라엘', '수도', '예루살렘', '텔아비브'], verdict: 'uncertain', title: '이스라엘의 수도는 예루살렘(국제적으론 논쟁 중)입니다', description: '이스라엘은 예루살렘을 수도라고 주장하나, 대부분의 국가는 텔아비브를 수도로 간주합니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['파키스탄', '수도', '이슬라마바드'], verdict: 'true', title: '파키스탄의 수도는 이슬라마바드입니다', description: '남아시아의 국가로 수도는 이슬라마바드입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // --- 유럽 (추가) ---
+    { keywords: ['벨기에', '수도', '브뤼셀'], verdict: 'true', title: '벨기에의 수도는 브뤼셀입니다', description: '유럽연합(EU) 본부가 있는 브뤼셀이 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['네덜란드', '수도', '암스테르담'], verdict: 'true', title: '네덜란드의 수도는 암스테르담입니다', description: '행정 기능은 헤이그에 있으나 헌법상 수도는 암스테르담입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['스위스', '수도', '베른'], verdict: 'true', title: '스위스의 수도는 베른입니다', description: '취리히나 제네바가 아닌 베른이 공식 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['포르투갈', '수도', '리스본'], verdict: 'true', title: '포르투갈의 수도는 리스본입니다', description: '이베리아 반도 서쪽 국가 포르투갈의 수도는 리스본입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['스웨덴', '수도', '스톡홀름'], verdict: 'true', title: '스웨덴의 수도는 스톡홀름입니다', description: '북유럽 스칸디나비아 국가 스웨덴의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['노르웨이', '수도', '오슬로'], verdict: 'true', title: '노르웨이의 수도는 오슬로입니다', description: '북유럽 국가 노르웨이의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['덴마크', '수도', '코펜하겐'], verdict: 'true', title: '덴마크의 수도는 코펜하겐입니다', description: '북유럽 국가 덴마크의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['핀란드', '수도', '헬싱키'], verdict: 'true', title: '핀란드의 수도는 헬싱키입니다', description: '북유럽 국가 핀란드의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['폴란드', '수도', '바르샤바'], verdict: 'true', title: '폴란드의 수도는 바르샤바입니다', description: '중앙유럽 국가 폴란드의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['체코', '수도', '프라하'], verdict: 'true', title: '체코의 수도는 프라하입니다', description: '중앙유럽 국가 체코의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['헝가리', '수도', '부다페스트'], verdict: 'true', title: '헝가리의 수도는 부다페스트입니다', description: '중앙유럽 국가 헝가리의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // --- 아메리카 (추가) ---
+    { keywords: ['브라질', '수도', '브라질리아'], verdict: 'true', title: '브라질의 수도는 브라질리아입니다', description: '리우데자네이루나 상파울루가 아닌 계획도시 브라질리아가 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['콜롬비아', '수도', '보고타'], verdict: 'true', title: '콜롬비아의 수도는 보고타입니다', description: '남아메리카 북서부 국가 콜롬비아의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['페루', '수도', '리마'], verdict: 'true', title: '페루의 수도는 리마입니다', description: '남아메리카 국가 페루의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['쿠바', '수도', '아바나'], verdict: 'true', title: '쿠바의 수도는 아바나입니다', description: '카리브해 섬나라 쿠바의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // --- 아프리카 ---
+    { keywords: ['이집트', '수도', '카이로'], verdict: 'true', title: '이집트의 수도는 카이로입니다', description: '북아프리카 국가 이집트의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['나이지리아', '수도', '아부자'], verdict: 'true', title: '나이지리아의 수도는 아부자입니다', description: '아프리카 인구 1위 국가 나이지리아의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['에티오피아', '수도', '아디스아바바'], verdict: 'true', title: '에티오피아의 수도는 아디스아바바입니다', description: '동아프리카 국가 에티오피아의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['모로코', '수도', '라바트'], verdict: 'true', title: '모로코의 수도는 라바트입니다', description: '카사블랑카가 아닌 라바트가 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // --- 기타 주요 대도시 ---
+    { keywords: ['뉴욕', '미국', '최대도시'], verdict: 'true', title: '뉴욕은 미국의 최대 도시입니다', description: '미국의 경제, 문화 중심지이지만 수도는 아닙니다(수도는 워싱턴 D.C.).', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['로스앤젤레스', 'LA', '미국'], verdict: 'true', title: '로스앤젤레스는 미국 서부 최대 도시입니다', description: '할리우드로 유명한 캘리포니아의 대도시입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['시카고', '미국'], verdict: 'true', title: '시카고는 미국 일리노이주의 최대 도시입니다', description: '오대호 연안의 대도시입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['상하이', '중국', '최대도시'], verdict: 'true', title: '상하이는 중국의 최대 경제 도시입니다', description: '중국 경제의 중심지입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['시드니', '호주', '최대도시'], verdict: 'true', title: '시드니는 호주의 최대 도시입니다', description: '오페라 하우스로 유명하지만 호주의 수도는 아닙니다(수도는 캔버라).', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['이스탄불', '터키', '튀르키예', '최대도시'], verdict: 'true', title: '이스탄불은 튀르키예의 최대 도시입니다', description: '역사적으로 유명하지만 수도는 아닙니다(수도는 앙카라).', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['상파울루', '브라질', '최대도시'], verdict: 'true', title: '상파울루는 브라질 및 남미 최대 도시입니다', description: '브라질의 경제 중심지입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['뭄바이', '인도', '최대도시'], verdict: 'true', title: '뭄바이는 인도의 최대 도시입니다', description: '인도 경제의 중심지입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // ==================== [BATCH 2] 전 세계 국가 및 도시 (v4.19 확장) ====================
+    // --- 아시아 (추가2) ---
+    { keywords: ['우즈베키스탄', '수도', '타슈켄트'], verdict: 'true', title: '우즈베키스탄의 수도는 타슈켄트입니다', description: '중앙아시아의 국가로 수도는 타슈켄트입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['카자흐스탄', '수도', '아스타나'], verdict: 'true', title: '카자흐스탄의 수도는 아스타나입니다', description: '중앙아시아의 국가로 수도는 아스타나입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['네팔', '수도', '카트만두'], verdict: 'true', title: '네팔의 수도는 카트만두입니다', description: '히말라야 산맥에 위치한 국가로 수도는 카트만두입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['스리랑카', '수도', '콜롬보', '코테'], verdict: 'true', title: '스리랑카의 수도는 스리자야와르데네푸라코테입니다', description: '행정 수도는 코테이며 최대 도시는 콜롬보입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['방글라데시', '수도', '다카'], verdict: 'true', title: '방글라데시의 수도는 다카입니다', description: '남아시아의 국가로 수도는 다카입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // --- 유럽 (추가2) ---
+    { keywords: ['아일랜드', '수도', '더블린'], verdict: 'true', title: '아일랜드의 수도는 더블린입니다', description: '유럽 서쪽 섬나라 아일랜드의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['오스트리아', '수도', '빈'], verdict: 'true', title: '오스트리아의 수도는 빈입니다', description: '중앙유럽의 국가로 수도는 빈입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['루마니아', '수도', '부쿠레슈티'], verdict: 'true', title: '루마니아의 수도는 부쿠레슈티입니다', description: '동유럽의 국가로 수도는 부쿠레슈티입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['불가리아', '수도', '소피아'], verdict: 'true', title: '불가리아의 수도는 소피아입니다', description: '동유럽의 국가로 수도는 소피아입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['크로아티아', '수도', '자그레브'], verdict: 'true', title: '크로아티아의 수도는 자그레브입니다', description: '남유럽의 국가로 수도는 자그레브입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // --- 아메리카 (추가2) ---
+    { keywords: ['베네수엘라', '수도', '카라카스'], verdict: 'true', title: '베네수엘라의 수도는 카라카스입니다', description: '남아메리카 북부 국가 베네수엘라의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['에콰도르', '수도', '키토'], verdict: 'true', title: '에콰도르의 수도는 키토입니다', description: '남아메리카 국가 에콰도르의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['파라과이', '수도', '아순시온'], verdict: 'true', title: '파라과이의 수도는 아순시온입니다', description: '남아메리카 국가 파라과이의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['우루과이', '수도', '몬테비데오'], verdict: 'true', title: '우루과이의 수도는 몬테비데오입니다', description: '남아메리카 국가 우루과이의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['파나마', '수도', '파나마시티'], verdict: 'true', title: '파나마의 수도는 파나마시티입니다', description: '중앙아메리카 국가 파나마의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // --- 아프리카 (추가2) ---
+    { keywords: ['알제리', '수도', '알제'], verdict: 'true', title: '알제리의 수도는 알제입니다', description: '북아프리카 국가 알제리의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['가나', '수도', '아크라'], verdict: 'true', title: '가나의 수도는 아크라입니다', description: '서아프리카 국가 가나의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['탄자니아', '수도', '도도마', '다르에스살람'], verdict: 'true', title: '탄자니아의 수도는 도도마입니다', description: '행정 수도는 도도마이며 최대 도시는 다르에스살람입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['세네갈', '수도', '다카르'], verdict: 'true', title: '세네갈의 수도는 다카르입니다', description: '서아프리카 국가 세네갈의 수도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // --- 오세아니아 ---
+    { keywords: ['파푸아뉴기니', '수도', '포트모르즈비'], verdict: 'true', title: '파푸아뉴기니의 수도는 포트모르즈비입니다', description: '오세아니아의 국가로 수도는 포트모르즈비입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['피지', '수도', '수바'], verdict: 'true', title: '피지의 수도는 수바입니다', description: '남태평양의 섬나라로 수도는 수바입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // --- 도시 정보 추가 ---
+    { keywords: ['토론토', '캐나다', '최대도시'], verdict: 'true', title: '토론토는 캐나다의 최대 도시입니다', description: '온타리오주의 주도이자 경제 중심지입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['밴쿠버', '캐나다'], verdict: 'true', title: '밴쿠버는 캐나다 서부의 주요 도시입니다', description: '브리티시컬럼비아주의 큰 항구 도시입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['멜버른', '호주'], verdict: 'true', title: '멜버른은 호주 제2의 도시입니다', description: '빅토리아주의 주도입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['바르셀로나', '스페인'], verdict: 'true', title: '바르셀로나는 스페인 제2의 도시입니다', description: '카탈루냐 지방의 중심지입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['밀라노', '이탈리아'], verdict: 'true', title: '밀라노는 이탈리아 북부의 패션 및 경제 중심지입니다', description: '이탈리아에서 두 번째로 큰 도시입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['뮌헨', '독일'], verdict: 'true', title: '뮌헨은 독일 바이에른주의 주도입니다', description: '독일 남부의 주요 도시입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+    { keywords: ['오사카', '일본'], verdict: 'true', title: '오사카는 일본 관서 지방의 중심 도시입니다', description: '일본 제2의 대도시권 중심지입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] }
 ];
 
 // 전역으로 노출

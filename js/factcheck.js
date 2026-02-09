@@ -1,7 +1,7 @@
 // 팩트체크 기능
 class FactChecker {
     constructor() {
-        this.version = '4.20'; // 국내 행정구역 및 교통 정보 대규모 보강
+        this.version = '4.21'; // 북한 지리 및 국내 교육 체계 상식 보강
         this.cache = this.loadCache();
 
         // API 키 설정 (직접 입력)

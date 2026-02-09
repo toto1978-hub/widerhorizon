@@ -1,6 +1,6 @@
 // 팩트체크 데이터 (fact-data.js)
 // 유지보수 및 효율성을 위해 데이터 분리
-// v4.20 - 국내 행정구역(읍면동) 및 교통(전철, 버스, 기차, 공항) 정보 대규모 보강
+// v4.21 - 북한 지리 정보 및 국내 교육 시스템(초중고대) 정보 대규모 보강
 
 const COMMON_FAKE_NEWS = [
     // ==================== 시간/날짜 관련 ====================
@@ -1233,7 +1233,24 @@ const OBVIOUS_FACTS = [
     { keywords: ['광역버스', '빨간버스'], verdict: 'true', title: '빨간색 광역버스는 수도권 외곽과 서울 도심을 빠르게 연결하는 버스입니다', description: '주요 정류장만 정차하며 고속도로 또는 전용차로를 이용합니다.', sources: [{ title: '경기도버스정보', url: 'http://www.gbis.go.kr' }] },
     { keywords: ['간선버스', '파란버스'], verdict: 'true', title: '파란색 간선버스는 서울 시내 먼 거리를 연결하는 버스입니다', description: '주로 큰 대로를 따라 운행하며 구와 구 사이를 연결합니다.', sources: [{ title: '서울교통정보센터', url: 'http://topis.seoul.go.kr' }] },
     { keywords: ['지선버스', '초록버스'], verdict: 'true', title: '초록색 지선버스는 가까운 거리를 연결하거나 지하철역으로 데려다주는 버스입니다', description: '동네 구석구석을 운행하며 간선버스나 지하철로의 환승을 돕습니다.', sources: [{ title: '서울교통정보센터', url: 'http://topis.seoul.go.kr' }] },
-    { keywords: ['마을버스', '노란버스'], verdict: 'true', title: '노란색 또는 작은 초록색 마을버스는 동네 내부의 좁은 길을 운행합니다', description: '가장 짧은 구간을 운행하며 주민들의 이동 편의를 돕습니다.', sources: [{ title: '서울교통정보센터', url: 'http://topis.seoul.go.kr' }] }
+    { keywords: ['마을버스', '노란버스'], verdict: 'true', title: '노란색 또는 작은 초록색 마을버스는 동네 내부의 좁은 길을 운행합니다', description: '가장 짧은 구간을 운행하며 주민들의 이동 편의를 돕습니다.', sources: [{ title: '서울교통정보센터', url: 'http://topis.seoul.go.kr' }] },
+
+    // ==================== [BATCH 1] 북한 지리 정보 (v4.21 확장) ====================
+    { keywords: ['북한', '수도', '평양'], verdict: 'true', title: '북한의 수도는 평양직할시입니다', description: '평양은 북한의 정치, 경제, 문화의 중심지입니다.', sources: [{ title: '통일부', url: 'https://www.unikorea.go.kr' }] },
+    { keywords: ['개성', '개성공단'], verdict: 'true', title: '개성은 북한의 주요 도시로 과거 개성공단이 위치했던 곳입니다', description: '고려의 수도였으며 남북 경제 협력의 상징적인 장소였습니다.', sources: [{ title: '통일부', url: 'https://www.unikorea.go.kr' }] },
+    { keywords: ['백두산', '북한', '중국', '경계'], verdict: 'true', title: '백두산은 한반도에서 가장 높은 산으로 북한과 중국의 경계에 있습니다', description: '높이는 2,744m이며 천지가 있는 것으로 유명합니다.', sources: [{ title: '통일부', url: 'https://www.unikorea.go.kr' }] },
+    { keywords: ['금강산', '강원도', '북한'], verdict: 'true', title: '금강산은 북한 강원도에 위치한 명산입니다', description: '계절에 따라 이름이 다르며(봄-금강, 여름-봉래, 가을-풍악, 겨울-개골) 1만 2천 봉으로 유명합니다.', sources: [{ title: '통일부', url: 'https://www.unikorea.go.kr' }] },
+    { keywords: ['묘향산', '북한', '평안북도', '자강도'], verdict: 'true', title: '묘향산은 북안북도와 자강도 경계에 있는 북한의 명산입니다', description: '경치가 묘하고 향기가 난다고 하여 묘향산이라 불립니다.', sources: [{ title: '통일부', url: 'https://www.unikorea.go.kr' }] },
+    { keywords: ['라선', '나선', '특별시'], verdict: 'true', title: '라선(나선)은 북한의 특별시로 대외 무역의 거점입니다', description: '나진과 선봉을 합쳐 만든 행정구역입니다.', sources: [{ title: '통일부', url: 'https://www.unikorea.go.kr' }] },
+    { keywords: ['북한', '정부', '9개 도'], verdict: 'true', title: '북한의 행정구역은 평양 외 9개의 도로 구성되어 있습니다', description: '함경남·북도, 평안남·북도, 황해남·북도, 강원도, 자강도, 양강도가 있습니다.', sources: [{ title: '통일부', url: 'https://www.unikorea.go.kr' }] },
+
+    // ==================== [BATCH 2] 국내 교육 체계 (v4.21 확장) ====================
+    { keywords: ['교육', '학제', '6-3-3-4'], verdict: 'true', title: '대한민국의 기본 학제는 초등학교 6년, 중학교 3년, 고등학교 3년, 대학교 4년입니다', description: '초등학교와 중학교 9년은 의무 교육 기간입니다.', sources: [{ title: '교육부', url: 'https://www.moe.go.kr' }] },
+    { keywords: ['특목고', '과학고', '외고', '예고'], verdict: 'true', title: '특수목적고등학교(특목고)는 특정 분야의 인재 양성을 목적으로 합니다', description: '과학고, 외국어고, 국제고, 예술고, 체육고 등이 있습니다.', sources: [{ title: '교육부', url: 'https://www.moe.go.kr' }] },
+    { keywords: ['자사고', '자율형사립고'], verdict: 'true', title: '자율형 사립고등학교(자사고)는 교육 과정을 자율적으로 운영하는 사립 교입니다', description: '학교 운영의 자율성이 일반고등학교보다 큽니다.', sources: [{ title: '교육부', url: 'https://www.moe.go.kr' }] },
+    { keywords: ['학사', '석사', '박사', '순서'], verdict: 'true', title: '대학 학위 순서는 학사(대학), 석사(대학원), 박사(대학원) 순입니다', description: '학사는 보통 4년, 석사는 2년 이상의 과정을 거칩니다.', sources: [{ title: '교육부', url: 'https://www.moe.go.kr' }] },
+    { keywords: ['전문대학', '2년제', '3년제'], verdict: 'true', title: '전문대학은 전문 직업인 양성을 목적으로 하며 보통 2년 또는 3년 과정입니다', description: '실무 중심의 교육을 제공합니다.', sources: [{ title: '교육부', url: 'https://www.moe.go.kr' }] },
+    { keywords: ['종합대학교', '단과대학'], verdict: 'true', title: '종합대학교는 여러 개의 단과대학으로 구성된 대규모 대학입니다', description: '인문, 사회, 자연과학, 공학 등 다양한 전공이 함께 있습니다.', sources: [{ title: '교육부', url: 'https://www.moe.go.kr' }] }
 ];
 
 // 전역으로 노출

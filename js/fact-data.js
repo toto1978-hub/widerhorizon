@@ -1,6 +1,6 @@
 // 팩트체크 데이터 (fact-data.js)
 // 유지보수 및 효율성을 위해 데이터 분리
-// v4.19 - 전 세계 국가(195개국 이상) 및 주요 도시 데이터 대규모 보강
+// v4.20 - 국내 행정구역(읍면동) 및 교통(전철, 버스, 기차, 공항) 정보 대규모 보강
 
 const COMMON_FAKE_NEWS = [
     // ==================== 시간/날짜 관련 ====================
@@ -1202,7 +1202,38 @@ const OBVIOUS_FACTS = [
     { keywords: ['바르셀로나', '스페인'], verdict: 'true', title: '바르셀로나는 스페인 제2의 도시입니다', description: '카탈루냐 지방의 중심지입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
     { keywords: ['밀라노', '이탈리아'], verdict: 'true', title: '밀라노는 이탈리아 북부의 패션 및 경제 중심지입니다', description: '이탈리아에서 두 번째로 큰 도시입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
     { keywords: ['뮌헨', '독일'], verdict: 'true', title: '뮌헨은 독일 바이에른주의 주도입니다', description: '독일 남부의 주요 도시입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
-    { keywords: ['오사카', '일본'], verdict: 'true', title: '오사카는 일본 관서 지방의 중심 도시입니다', description: '일본 제2의 대도시권 중심지입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] }
+    { keywords: ['오사카', '일본'], verdict: 'true', title: '오사카는 일본 관서 지방의 중심 도시입니다', description: '일본 제2의 대도시권 중심지입니다.', sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }] },
+
+    // ==================== [BATCH 1] 국내 행정구역 (v4.20 확장) ====================
+    { keywords: ['서울', '25개 구'], verdict: 'true', title: '서울특별시에는 총 25개의 자치구가 있습니다', description: '강남구, 종로구, 송파구 등 총 25개의 구가 서울을 구성합니다.', sources: [{ title: '서울특별시', url: 'https://www.seoul.go.kr' }] },
+    { keywords: ['장안구', '권선구', '팔달구', '영통구', '수원'], verdict: 'true', title: '수원시에는 장안, 권선, 팔달, 영통 4개의 구가 있습니다', description: '수원시는 경기도의 도청 소재지이자 최대 도시입니다.', sources: [{ title: '수원시청', url: 'https://www.suwon.go.kr' }] },
+    { keywords: ['분당구', '수정구', '중원구', '성남'], verdict: 'true', title: '성남시에는 수정, 중원, 분당 3개의 구가 있습니다', description: '경기도의 대표적인 주요 도시 중 하나입니다.', sources: [{ title: '성남시청', url: 'https://www.seongnam.go.kr' }] },
+    { keywords: ['부산', '광역시', '수도'], verdict: 'true', title: '부산광역시는 대한민국의 제2도시이자 최대 항구도시입니다', description: '서울 다음으로 큰 도시이며 해운대, 광안리 등이 유명합니다.', sources: [{ title: '부산광역시', url: 'https://www.busan.go.kr' }] },
+    { keywords: ['인천', '광역시', '공항'], verdict: 'true', title: '인천광역시는 서해안의 중심 도시로 국제공항이 있습니다', description: '인천국제공항과 인천항이 위치한 관문 도시입니다.', sources: [{ title: '인천광역시', url: 'https://www.incheon.go.kr' }] },
+    { keywords: ['광주', '광역시', '호남'], verdict: 'true', title: '광주광역시는 호남 지방의 중심 도시입니다', description: '전라권의 최대 도시이며 빛고을이라는 별칭이 있습니다.', sources: [{ title: '광주광역시', url: 'https://www.gwangju.go.kr' }] },
+    { keywords: ['대구', '광역시', '영남'], verdict: 'true', title: '대구광역시는 영남 내륙의 중심 도시입니다', description: '팔공산이 위치하며 전통적으로 사과와 섬유 산업이 유명했습니다.', sources: [{ title: '대구광역시', url: 'https://www.daegu.go.kr' }] },
+    { keywords: ['대전', '광역시', '과학'], verdict: 'true', title: '대전광역시는 과학과 행정의 중심 도시입니다', description: '대덕연구단지가 위치하며 충청권의 최대 도시입니다.', sources: [{ title: '대전광역시', url: 'https://www.daejeon.go.kr' }] },
+    { keywords: ['울산', '광역시', '공업'], verdict: 'true', title: '울산광역시는 대한민국의 대표적인 공업 도시입니다', description: '현대자동차, 현대중공업 등 대규모 공업 단지가 밀집해 있습니다.', sources: [{ title: '울산광역시', url: 'https://www.ulsan.go.kr' }] },
+    { keywords: ['세종', '특별자치시', '행정'], verdict: 'true', title: '세종특별자치시는 대한민국의 행정 중심 복합도시입니다', description: '정부세종청사가 위치한 행정 주도 도시입니다.', sources: [{ title: '세종특별자치시', url: 'https://www.sejong.go.kr' }] },
+    { keywords: ['제주', '특별자치도', '섬'], verdict: 'true', title: '제주특별자치도는 대한민국 최대의 섬입니다', description: '유네스코 세계자연유산으로 등재된 관광 중심지입니다.', sources: [{ title: '제주특별자치도', url: 'https://www.jeju.go.kr' }] },
+    { keywords: ['독도', '경상북도', '울릉군'], verdict: 'true', title: '독도는 행정구역상 경상북도 울릉군 울릉읍에 속합니다', description: '대한민국의 고유 영토로 울릉도 옆에 위치하고 있습니다.', sources: [{ title: '외교부 독도', url: 'https://dokdo.mofa.go.kr' }] },
+    { keywords: ['읍', '면', '동', '차이'], verdict: 'true', title: '동은 시 지역에, 읍과 면은 군 지역에 설치되는 행정 단위입니다', description: '인구와 특성에 따라 구분되며 면보다 읍이 인구가 더 많고 도시 형태를 갖춥니다.', sources: [{ title: '행정안전부', url: 'https://www.mois.go.kr' }] },
+
+    // ==================== [BATCH 2] 국내 교통 정보 (v4.20 확장) ====================
+    { keywords: ['KTX', 'SRT', '차이'], verdict: 'true', title: 'KTX는 한국철도공사(코레일), SRT는 (주)SR에서 운영하는 고속열차입니다', description: 'KTX는 서울역과 용산역, SRT는 수서역을 주로 이용하며 노선과 운임에 미세한 차이가 있습니다.', sources: [{ title: '레츠코레일', url: 'https://www.letskorail.com' }, { title: 'SRT', url: 'https://www.srail.or.kr' }] },
+    { keywords: ['지하철', '1호선', '특징'], verdict: 'true', title: '수도권 지하철 1호선은 대한민국 최초의 지하철 노선입니다', description: '서울역, 종로, 청량리 등을 지나며 경인선, 경부선 등으로 이어지는 매우 긴 노선입니다.', sources: [{ title: '서울교통공사', url: 'http://www.seoulmetro.co.kr' }] },
+    { keywords: ['지하철', '2호선', '순환선'], verdict: 'true', title: '수도권 지하철 2호선은 서울 시내를 한 바퀴 도는 순환선입니다', description: '강남, 홍대, 시청, 잠실 등 주요 거점을 연결하며 이용객이 가장 많은 노선입니다.', sources: [{ title: '서울교통공사', url: 'http://www.seoulmetro.co.kr' }] },
+    { keywords: ['지하철', '9호선', '급행'], verdict: 'true', title: '9호선은 김포공항에서 강남을 거쳐 중앙보훈병원까지 연결되며 급행 열차가 운행됩니다', description: '황금노선이라 불리며 출퇴근 시간 혼잡도가 높기로 유명합니다.', sources: [{ title: '서울교통공사', url: 'http://www.seoulmetro.co.kr' }] },
+    { keywords: ['경강선', '판교', '여주'], verdict: 'true', title: '경강선은 판교에서 출발하여 광주, 이천을 거쳐 여주까지 연결되는 노선입니다', description: '경기도 동남부 지역의 교통 편의를 위해 개통된 철도 노선입니다.', sources: [{ title: '한국철도공사', url: 'https://www.letskorail.com' }] },
+    { keywords: ['GTX', '수도권', '광역급행철도'], verdict: 'true', title: 'GTX는 수도권 외곽에서 서울 도심까지 빠르게 연결하는 광역급행철도입니다', description: 'A, B, C 등 여러 노선이 계획 및 건설 중이며 일반 지하철보다 훨씬 빠릅니다.', sources: [{ title: '국토교통부', url: 'https://www.molit.go.kr' }] },
+    { keywords: ['인천국제공항', '영종도', '터미널'], verdict: 'true', title: '인천국제공항은 영종도에 위치하며 제1터미널과 제2터미널이 있습니다', description: '대한민국의 관문 공항으로 전 세계로 나가는 국제선이 운행됩니다.', sources: [{ title: '인천국제공항공사', url: 'https://www.airport.kr' }] },
+    { keywords: ['김포공항', '국내선', '강서구'], verdict: 'true', title: '김포공항은 서울 강서구에 위치하며 주로 국내선과 일부 단거리 국제선을 운행합니다', description: '제주도나 부산 등으로 갈 때 주로 이용하는 공항입니다.', sources: [{ title: '한국공항공사', url: 'https://www.airport.co.kr' }] },
+    { keywords: ['김해공항', '부산', '경남'], verdict: 'true', title: '김해공항은 부산과 경남 지역의 거점 공항입니다', description: '부산 강서구에 위치하며 국내선 및 국제선을 모두 운행합니다.', sources: [{ title: '한국공항공사', url: 'https://www.airport.co.kr' }] },
+    { keywords: ['제주공항', '제주도'], verdict: 'true', title: '제주국제공항은 제주도의 유일한 국제공항입니다', description: '전 세계에서 가장 붐비는 노선 중 하나인 서울-제주 노선의 종점입니다.', sources: [{ title: '한국공항공사', url: 'https://www.airport.co.kr' }] },
+    { keywords: ['광역버스', '빨간버스'], verdict: 'true', title: '빨간색 광역버스는 수도권 외곽과 서울 도심을 빠르게 연결하는 버스입니다', description: '주요 정류장만 정차하며 고속도로 또는 전용차로를 이용합니다.', sources: [{ title: '경기도버스정보', url: 'http://www.gbis.go.kr' }] },
+    { keywords: ['간선버스', '파란버스'], verdict: 'true', title: '파란색 간선버스는 서울 시내 먼 거리를 연결하는 버스입니다', description: '주로 큰 대로를 따라 운행하며 구와 구 사이를 연결합니다.', sources: [{ title: '서울교통정보센터', url: 'http://topis.seoul.go.kr' }] },
+    { keywords: ['지선버스', '초록버스'], verdict: 'true', title: '초록색 지선버스는 가까운 거리를 연결하거나 지하철역으로 데려다주는 버스입니다', description: '동네 구석구석을 운행하며 간선버스나 지하철로의 환승을 돕습니다.', sources: [{ title: '서울교통정보센터', url: 'http://topis.seoul.go.kr' }] },
+    { keywords: ['마을버스', '노란버스'], verdict: 'true', title: '노란색 또는 작은 초록색 마을버스는 동네 내부의 좁은 길을 운행합니다', description: '가장 짧은 구간을 운행하며 주민들의 이동 편의를 돕습니다.', sources: [{ title: '서울교통정보센터', url: 'http://topis.seoul.go.kr' }] }
 ];
 
 // 전역으로 노출

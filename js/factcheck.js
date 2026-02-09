@@ -1,7 +1,7 @@
 // 팩트체크 기능
 class FactChecker {
     constructor() {
-        this.version = '4.19'; // 전 세계 국가 및 도시 데이터 대규모 보강 v2
+        this.version = '4.20'; // 국내 행정구역 및 교통 정보 대규모 보강
         this.cache = this.loadCache();
 
         // API 키 설정 (직접 입력)

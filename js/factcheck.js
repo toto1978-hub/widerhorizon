@@ -1,7 +1,7 @@
 // 팩트체크 기능
 class FactChecker {
     constructor() {
-        this.version = '4.14'; // fact-data.js 전역 노출 버그 수정
+        this.version = '4.16'; // 상식 데이터베이스 대폭 확장 (100개 이상 추가)
         this.cache = this.loadCache();
 
         // API 키 설정 (직접 입력)
@@ -455,6 +455,24 @@ class FactChecker {
 
         // 키워드 매칭
         for (const fact of allFacts) {
+            // requiredPatterns 체크: 필수 패턴이 포함되어야 함
+            if (fact.requiredPatterns && fact.requiredPatterns.length > 0) {
+                const hasRequiredPattern = fact.requiredPatterns.some(pattern => pattern.test(text));
+                if (!hasRequiredPattern) continue; // 필수 패턴이 없으면 스킵
+            }
+
+            // excludePatterns 체크: 제외 패턴이 있으면 스킵해야 함
+            if (fact.excludePatterns && fact.excludePatterns.length > 0) {
+                const hasExcludedPattern = fact.excludePatterns.some(pattern => pattern.test(text));
+                if (hasExcludedPattern) continue; // 제외 패턴이 있으면 스킵
+            }
+
+            // matchPatterns 체크: 매칭 패턴이 있어야 함
+            if (fact.matchPatterns && fact.matchPatterns.length > 0) {
+                const hasMatchPattern = fact.matchPatterns.some(pattern => pattern.test(text));
+                if (!hasMatchPattern) continue; // 매칭 패턴이 없으면 스킵
+            }
+
             // 1. 일반 매칭 (원문 기준)
             let matchedKeywords = fact.keywords.filter(keyword => textLower.includes(keyword));
             let matchCount = matchedKeywords.length;

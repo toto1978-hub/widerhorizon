@@ -1,6 +1,6 @@
 // 팩트체크 데이터 (fact-data.js)
 // 유지보수 및 효율성을 위해 데이터 분리
-// v4.16 - 상식 데이터베이스 대폭 확장
+// v4.17 - 상식 데이터베이스 대규모 확장 (인물, 시사, 국제, 과학, 수학, 성경, 언어)
 
 const COMMON_FAKE_NEWS = [
     // ==================== 시간/날짜 관련 ====================
@@ -750,6 +750,216 @@ const OBVIOUS_FACTS = [
         title: '달은 지구 주위를 돕니다',
         description: '달은 지구의 위성으로 지구 주위를 약 27일마다 공전합니다.',
         sources: [{ title: 'NASA', url: 'https://www.nasa.gov' }]
+    },
+
+    // ==================== 인물 상식 ====================
+    {
+        keywords: ['아인슈타인', '상대성', '이론'],
+        verdict: 'true',
+        title: '알베르트 아인슈타인은 상대성 이론을 발표했습니다',
+        description: '아인슈타인은 현대 물리학의 두 기둥 중 하나인 상대성 이론을 구축한 천재 물리학자입니다.',
+        sources: [{ title: '위키백과', url: 'https://ko.wikipedia.org/wiki/%EC%95%8C%EB%B2%A0%EB%A5%B4%ED%8A%B8_%EC%95%84%EC%9D%B8%EC%8A%88%ED%83%80%EC%9D%B8' }]
+    },
+    {
+        keywords: ['뉴턴', '만유인력', '중력'],
+        verdict: 'true',
+        title: '아이작 뉴턴은 만유인력의 법칙을 발견했습니다',
+        description: '뉴턴은 사과가 떨어지는 것을 보고 만유인력의 법칙을 발견한 영국의 물리학자입니다.',
+        sources: [{ title: '위키백과', url: 'https://ko.wikipedia.org/wiki/%EC%95%84%EC%9D%B4%EC%9E%91_%EB%89%B4%ED%84%B4' }]
+    },
+    {
+        keywords: ['에디슨', '전구', '발명'],
+        verdict: 'true',
+        title: '토마스 에디슨은 전구를 발명했습니다',
+        description: '에디슨은 전구뿐만 아니라 영사기, 축음기 등 수많은 발명품을 남긴 미국의 발명가입니다.',
+        sources: [{ title: '위키백과', url: 'https://ko.wikipedia.org/wiki/%ED%86%A0%EB%A7%88%EC%8A%A4_%EC%97%90%EB%94%94%EC%8A%A8' }]
+    },
+    {
+        keywords: ['링컨', '노예', '해방'],
+        verdict: 'true',
+        title: '에이브러햄 링컨은 노예 해방을 선언했습니다',
+        description: '미국의 제16대 대통령인 링컨은 남북전쟁 중에 노예 해방 선언을 했습니다.',
+        sources: [{ title: '위키백과', url: 'https://ko.wikipedia.org/wiki/%EC%97%90%EC%9D%B4%EB%B8%8C%EB%9F%AC%ED%96%84_%EB%A7%81%EC%BB%A8' }]
+    },
+    {
+        keywords: ['빌게이츠', '마이크로소프트', 'MS'],
+        verdict: 'true',
+        title: '빌 게이츠는 마이크로소프트의 창업자입니다',
+        description: '빌 게이츠는 퍼스널 컴퓨터 혁명을 주도하고 기부 활동에 전념하는 미국의 기업가입니다.',
+        sources: [{ title: '위키백과', url: 'https://ko.wikipedia.org/wiki/%EB%B9%8C_%EA%B2%8C%EC%9D%B4%EC%B8%A0' }]
+    },
+    {
+        keywords: ['스티브잡스', '애플', '아이폰'],
+        verdict: 'true',
+        title: '스티브 잡스는 애플의 공동 창업자입니다',
+        description: '스티브 잡스는 매킨토시, 아이팟, 아이폰 등을 통해 세상의 혁신을 이끈 인물입니다.',
+        sources: [{ title: '위키백과', url: 'https://ko.wikipedia.org/wiki/%EC%8A%A4%ED%8B%B0%EB%B8%8C_%EC%9E%A1%EC%8A%A4' }]
+    },
+
+    // ==================== 경제/시사 상식 ====================
+    {
+        keywords: ['GDP', '국내총생산'],
+        verdict: 'true',
+        title: 'GDP는 국내총생산을 의미합니다',
+        description: '한 나라 안에서 일정 기간 생산된 모든 최종 재화와 서비스의 시장 가치의 합을 말합니다.',
+        sources: [{ title: '한국은행', url: 'https://www.bok.or.kr' }]
+    },
+    {
+        keywords: ['인플레이션', '물가', '상승'],
+        verdict: 'true',
+        title: '인플레이션은 물가가 지속적으로 오르는 현상입니다',
+        description: '화폐 가치가 하락하여 일반 물가 수준이 상승하는 현상을 인플레이션이라 합니다.',
+        sources: [{ title: '한국은행', url: 'https://www.bok.or.kr' }]
+    },
+    {
+        keywords: ['금리', '이자율'],
+        verdict: 'true',
+        title: '금리는 돈을 빌릴 때 지불하는 가격입니다',
+        description: '시장 상황이나 중앙은행의 결정에 따라 변동하는 돈의 이자율을 의미합니다.',
+        sources: [{ title: '한국은행', url: 'https://www.bok.or.kr' }]
+    },
+    {
+        keywords: ['ESG', '환경', '사회', '지배구조'],
+        verdict: 'true',
+        title: 'ESG는 기업의 비재무적 성과 지표입니다',
+        description: 'Environment(환경), Social(사회), Governance(지배구조)의 약자로 기업의 지속가능성을 평가합니다.',
+        sources: [{ title: '매경용어사전', url: 'https://dic.mk.co.kr' }]
+    },
+
+    // ==================== 국제 기구 상식 ====================
+    {
+        keywords: ['유엔', 'UN', '국제연합'],
+        verdict: 'true',
+        title: 'UN은 세계 평화를 위한 최대 국제기구입니다',
+        description: '전 세계의 전쟁 방지와 평화 유지를 목적으로 1945년에 설립되었습니다.',
+        sources: [{ title: '유엔 공식 사이트', url: 'https://www.un.org' }]
+    },
+    {
+        keywords: ['WHO', '세계보건기구'],
+        verdict: 'true',
+        title: 'WHO는 인류의 보건 증진을 위한 UN 산하기구입니다',
+        description: '세계 보건 문제에 대한 지휘 조정 역할을 담당하는 권위 있는 국제기구입니다.',
+        sources: [{ title: 'WHO 공식 사이트', url: 'https://www.who.int' }]
+    },
+    {
+        keywords: ['NATO', '나토', '북대서양조약기구'],
+        verdict: 'true',
+        title: 'NATO는 북미와 유럽 국가들의 군사 동맹체입니다',
+        description: '집단 방위를 목적으로 하는 서방 국가들의 강력한 국제 군사 기구입니다.',
+        sources: [{ title: 'NATO 공식 사이트', url: 'https://www.nato.int' }]
+    },
+
+    // ==================== 과학(화학/생물) 상식 ====================
+    {
+        keywords: ['원소', '주기율표', '수소'],
+        verdict: 'true',
+        title: '주기율표의 첫 번째 원소는 수소(H)입니다',
+        description: '수소는 우주에서 가장 풍부한 원소이며 원자 번호 1번입니다.',
+        sources: [{ title: '위키백과', url: 'https://ko.wikipedia.org/wiki/%EC%88%98%EC%86%8C' }]
+    },
+    {
+        keywords: ['DNA', '이중나선', '구조'],
+        verdict: 'true',
+        title: 'DNA는 이중나선 구조로 되어 있습니다',
+        description: '생명체의 유전 정보를 담고 있는 DNA는 두 가닥이 꼬인 사다리 모양을 하고 있습니다.',
+        sources: [{ title: '네이버 지식백과', url: 'https://terms.naver.com' }]
+    },
+    {
+        keywords: ['행성', '수금지화목토천해', '태양계'],
+        verdict: 'true',
+        title: '태양계 행성은 수, 금, 지, 화, 목, 토, 천, 해 순입니다',
+        description: '태양에 가까운 순서대로 수성, 금성, 지구, 화성, 목성, 토성, 천왕성, 해왕성입니다.',
+        sources: [{ title: 'NASA', url: 'https://www.nasa.gov' }]
+    },
+
+    // ==================== 수학 상식 ====================
+    {
+        keywords: ['피타고라스', '정리', '직각삼각형'],
+        verdict: 'true',
+        title: '피타고라스 정리는 a² + b² = c² 입니다',
+        description: '직각삼각형에서 빗변의 제곱은 다른 두 변의 제곱의 합과 같다는 법칙입니다.',
+        sources: [{ title: '수학 기초', url: 'https://www.science.org' }]
+    },
+    {
+        keywords: ['원의넓이', '파이', '반지름'],
+        verdict: 'true',
+        title: '원의 넓이 공식은 πr² 입니다',
+        description: '반지름(r)의 제곱에 원주율(π)을 곱하면 원의 넓이를 구할 수 있습니다.',
+        sources: [{ title: '수학 기초', url: 'https://www.science.org' }]
+    },
+    {
+        keywords: ['소수', '약수', '1과자기자신'],
+        verdict: 'true',
+        title: '소수는 1과 자기 자신만으로 나누어지는 수입니다',
+        description: '예를 들어 2, 3, 5, 7, 11 등이 대표적인 소수(Prime Number)입니다.',
+        sources: [{ title: '수학 기초', url: 'https://www.science.org' }]
+    },
+
+    // ==================== 성경 상식 ====================
+    {
+        keywords: ['성경', '몇권', '66권'],
+        verdict: 'true',
+        title: '성경은 총 66권으로 구성되어 있습니다',
+        description: '구약 39권과 신약 27권을 합쳐 총 66권입니다.',
+        sources: [{ title: '성경 가이드', url: '#' }]
+    },
+    {
+        keywords: ['구약', '성경', '39권'],
+        verdict: 'true',
+        title: '성경의 구약은 39권입니다',
+        description: '창세기부터 말라기까지 총 39권의 책이 구약 성경에 속합니다.',
+        sources: [{ title: '성경 가이드', url: '#' }]
+    },
+    {
+        keywords: ['신약', '성경', '27권'],
+        verdict: 'true',
+        title: '성경의 신약은 27권입니다',
+        description: '마태복음부터 요한계시록까지 총 27권의 책이 신약 성경에 속합니다.',
+        sources: [{ title: '성경 가이드', url: '#' }]
+    },
+    {
+        keywords: ['십계명', '계명', '열가지'],
+        verdict: 'true',
+        title: '십계명은 하나님이 주신 10가지 계명입니다',
+        description: '출애굽기에 기록된, 인간이 지켜야 할 가장 중요한 10가지 도덕법입니다.',
+        sources: [{ title: '성경 가이드', url: '#' }]
+    },
+    {
+        keywords: ['4복음서', '마태', '마가', '누가', '요한'],
+        verdict: 'true',
+        title: '4복음서는 마태, 마가, 누가, 요한복음입니다',
+        description: '예수 그리스도의 생애와 가르침을 기록한 신약 성경의 첫 4권입니다.',
+        sources: [{ title: '성경 가이드', url: '#' }]
+    },
+
+    // ==================== 언어 상식 ====================
+    {
+        keywords: ['한글', '자음', '14개'],
+        verdict: 'true',
+        title: '한글의 기본 자음은 14개입니다',
+        description: 'ㄱ, ㄴ, ㄷ, ㄹ, ㅁ, ㅂ, ㅅ, ㅇ, ㅈ, ㅊ, ㅋ, ㅌ, ㅍ, ㅎ의 14개입니다.',
+        sources: [{ title: '국립국어원', url: 'https://www.korean.go.kr' }]
+    },
+    {
+        keywords: ['한글', '모음', '10개'],
+        verdict: 'true',
+        title: '한글의 기본 모음은 10개입니다',
+        description: 'ㅏ, ㅑ, ㅓ, ㅕ, ㅗ, ㅛ, ㅜ, ㅠ, ㅡ, ㅣ의 10개입니다.',
+        sources: [{ title: '국립국어원', url: 'https://www.korean.go.kr' }]
+    },
+    {
+        keywords: ['알파벳', '영어', '26개'],
+        verdict: 'true',
+        title: '영어 알파벳은 총 26개입니다',
+        description: 'A부터 Z까지 대문자와 소문자 각각 26자로 구성되어 있습니다.',
+        sources: [{ title: '옥스퍼드 사전', url: '#' }]
+    },
+    {
+        keywords: ['세계언어', '사용자', '가장많은'],
+        verdict: 'true',
+        title: '영어는 세계에서 가장 널리 사용되는 언어입니다',
+        description: '전체 사용자(모국어+공용어) 기준 영어가 1위, 중국어가 2위 수준입니다.',
+        sources: [{ title: '에스놀로그', url: 'https://www.ethnologue.com' }]
     }
 ];
 

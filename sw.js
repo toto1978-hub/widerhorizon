@@ -1,12 +1,12 @@
-const CACHE_NAME = 'factwise-v4.17';
+const CACHE_NAME = 'factwise-v4.18';
 const urlsToCache = [
     './',
     './index.html',
-    './css/style.css?v=4.17',
-    './js/app.js?v=4.17',
-    './js/speech.js?v=4.17',
-    './js/fact-data.js?v=4.17',
-    './js/factcheck.js?v=4.17'
+    './css/style.css?v=4.18',
+    './js/app.js?v=4.18',
+    './js/speech.js?v=4.18',
+    './js/fact-data.js?v=4.18',
+    './js/factcheck.js?v=4.18'
 ];
 
 // 설치 이벤트

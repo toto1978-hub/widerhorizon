@@ -1,6 +1,6 @@
 // 팩트체크 데이터 (fact-data.js)
 // 유지보수 및 효율성을 위해 데이터 분리
-// v4.17 - 상식 데이터베이스 대규모 확장 (인물, 시사, 국제, 과학, 수학, 성경, 언어)
+// v4.18 - 국가 상식 데이터베이스 대폭 확장 (주요 국가 수도 및 대륙 정보)
 
 const COMMON_FAKE_NEWS = [
     // ==================== 시간/날짜 관련 ====================
@@ -960,6 +960,162 @@ const OBVIOUS_FACTS = [
         title: '영어는 세계에서 가장 널리 사용되는 언어입니다',
         description: '전체 사용자(모국어+공용어) 기준 영어가 1위, 중국어가 2위 수준입니다.',
         sources: [{ title: '에스놀로그', url: 'https://www.ethnologue.com' }]
+    },
+
+    // ==================== 국가 상식 (수도 및 대륙) ====================
+    // 아시아
+    {
+        keywords: ['베트남', '수도', '하노이'],
+        verdict: 'true',
+        title: '베트남의 수도는 하노이입니다',
+        description: '베트남은 동남아시아에 위치한 국가이며 수도는 하노이입니다. 호찌민시는 최대 경제 도시입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['태국', '수도', '방콕'],
+        verdict: 'true',
+        title: '태국의 수도는 방콕입니다',
+        description: '태국은 동남아시아의 국가로 수도는 방콕입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['인도네시아', '수도', '자카르타', '누산타라'],
+        verdict: 'true',
+        title: '인도네시아의 수도는 자카르타이며 누산타라로 이전 중입니다',
+        description: '인도네시아의 현재 수도는 자카르타이지만, 환경 문제 등으로 인해 보르네오섬의 누산타라로 수도 이전을 추진 중입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['인도', '수도', '뉴델리'],
+        verdict: 'true',
+        title: '인도의 수도는 뉴델리입니다',
+        description: '인도는 남아시아에 위치한 국가로 수도는 뉴델리입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['몽골', '수도', '울란바토르'],
+        verdict: 'true',
+        title: '몽골의 수도는 울란바토르입니다',
+        description: '몽골은 동아시아/중앙아시아에 위치한 내륙국으로 수도는 울란바토르입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['필리핀', '수도', '마닐라'],
+        verdict: 'true',
+        title: '필리핀의 수도는 마닐라입니다',
+        description: '필리핀은 동남아시아의 섬나라로 수도는 마닐라입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+
+    // 유럽
+    {
+        keywords: ['영국', '수도', '런던'],
+        verdict: 'true',
+        title: '영국의 수도는 런던입니다',
+        description: '영국은 유럽 서북부의 섬나라로 수도는 런던입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['프랑스', '수도', '파리'],
+        verdict: 'true',
+        title: '프랑스의 수도는 파리입니다',
+        description: '프랑스는 서유럽에 위치한 국가로 수도는 파리입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['독일', '수도', '베를린'],
+        verdict: 'true',
+        title: '독일의 수도는 베를린입니다',
+        description: '독일은 중앙유럽에 위치한 국가로 수도는 베를린입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['이탈리아', '수도', '로마'],
+        verdict: 'true',
+        title: '이탈리아의 수도는 로마입니다',
+        description: '이탈리아는 남유럽에 위치한 국가로 수도는 로마입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['스페인', '수도', '마드리드'],
+        verdict: 'true',
+        title: '스페인의 수도는 마드리드입니다',
+        description: '스페인은 남유럽(이베리아 반도)에 위치한 국가로 수도는 마드리드입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['우크라이나', '수도', '키이우', '키예프'],
+        verdict: 'true',
+        title: '우크라이나의 수도는 키이우입니다',
+        description: '동유럽에 위치한 우크라이나의 수도는 키이우(Kyiv)입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['그리스', '수도', '아테네'],
+        verdict: 'true',
+        title: '그리스의 수도는 아테네입니다',
+        description: '그리스는 남유럽에 위치한 국가로 수도는 아테네입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+
+    // 아메리카
+    {
+        keywords: ['캐나다', '수도', '오타와'],
+        verdict: 'true',
+        title: '캐나다의 수도는 오타와입니다',
+        description: '캐나다는 북아메리카 북부에 위치해 있으며 수도는 오타와입니다. 토론토나 밴쿠버가 아닙니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['멕시코', '수도', '멕시코시티'],
+        verdict: 'true',
+        title: '멕시코의 수도는 멕시코시티입니다',
+        description: '멕시코는 북아메리카(중남미)에 위치한 국가로 수도는 멕시코시티입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['아르헨티나', '수도', '부엔오스아이레스'],
+        verdict: 'true',
+        title: '아르헨티나의 수도는 부엔오스아이레스입니다',
+        description: '아르헨티나는 남아메리카 남부에 위치한 국가로 수도는 부엔오스아이레스입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['칠레', '수도', '산티아고'],
+        verdict: 'true',
+        title: '칠레의 수도는 산티아고입니다',
+        description: '남아메리카 서쪽에 위치한 칠레의 수도는 산티아고입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+
+    // 아프리카 및 오세아니아
+    {
+        keywords: ['남아프리카공화국', '남아공', '수도', '프리토리아'],
+        verdict: 'true',
+        title: '남아공의 행정 수도는 프리토리아입니다',
+        description: '남아공은 기능을 나누고 있는데, 행정수도는 프리토리아, 입법수도는 케이프타운, 사법수도는 블룸폰테인입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['케냐', '수도', '나이로비'],
+        verdict: 'true',
+        title: '케냐의 수도는 나이로비입니다',
+        description: '동아프리카에 위치한 케냐의 수도는 나이로비입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['뉴질랜드', '수도', '웰링턴'],
+        verdict: 'true',
+        title: '뉴질랜드의 수도는 웰링턴입니다',
+        description: '뉴질랜드은 오세아니아에 위치한 섬나라로 수도는 웰링턴입니다. 오클랜드가 아닙니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
+    },
+    {
+        keywords: ['오스트리아', '수도', '빈', '비엔나'],
+        verdict: 'true',
+        title: '오스트리아의 수도는 빈(비엔나)입니다',
+        description: '유럽 중앙에 위치한 오스트리아의 수도는 빈(Wien, Vienna)입니다.',
+        sources: [{ title: '외교부', url: 'https://www.mofa.go.kr' }]
     }
 ];
 

@@ -1,7 +1,7 @@
 // 팩트체크 기능
 class FactChecker {
     constructor() {
-        this.version = '4.17'; // 주제별 상식 데이터 대규모 확장 (인물, 수학, 성경 등)
+        this.version = '4.18'; // 국가 상식 데이터베이스 대폭 확장 (수도 및 대륙 정보)
         this.cache = this.loadCache();
 
         // API 키 설정 (직접 입력)
